@@ -1,0 +1,399 @@
+#include <stdio.h>  
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h> //用于实现toascii()函数
+#include <windows.h> 
+#include <conio.h>
+#define true 1
+#define false 0
+#define N 10000
+enum State {Empty, Active, Deleted} ; //定义枚举类型
+typedef struct node  
+{  
+	//name为用户名，phone为电话号码，address为地址，state为该结构体的状态
+    char name[20];
+	char phone[15];
+	char address[30];  
+    enum State state ;  
+} Node;  
+typedef struct hashTable  
+{  
+	Node *array;//数据元素存储基址，动态分配数组
+	int load;//当前数据元素个数
+	int size;//size为哈希表长  
+}HashTable ;  
+ 
+//函数原型声明 
+void doubleSpacebyname(HashTable *H);
+void doubleSpacebyphone(HashTable *H);
+ 
+int hash(HashTable *H,char name[])
+{//将人名字符串转化为ASCII码值求和，然后计算散列地址 
+	int i = 1;
+	int key;
+	int k =toascii(name[0]);
+	while(name[i]!='\0')
+	{
+		k += toascii(name[i]);
+		i++;
+	}
+	key = k % H->size;   
+	return key;
+}
+ 
+int isPrime (int n)  //判断n是否为素数 
+{  
+	int i;
+    if(n==2||n==3)
+		return true;
+	if(n==1||n%2==0)
+		return false;
+	for(i=3;i*i<=n;i+=2)
+		if(n%i==0)
+			return false;
+	return true;
+}
+ 
+int nextPrime (int n)  //寻找大于或等于n的最小素数 
+{  
+    if(n % 2==0)
+		++n;
+	while(!isPrime(n))
+		n += 2;
+	return n; 
+}
+ 
+int initializeTable (HashTable *H) //初始化散列表，表长为30
+{
+	 int length = 30;
+	 H->size = nextPrime(length);//size为p
+	 H->array =(Node *)malloc(sizeof(Node *));
+	 H->load = 0; 
+	 return 0;
+}
+ 
+int insertbyname (HashTable *H)   //以姓名为关键字添加联系人
+{  
+	char tname[18]; 
+    int pos,collisionNum = 0; //collisionNum碰撞次数
+	printf("请输入要添加的姓名：");
+	if(H->load*2>=H->size)
+		doubleSpacebyname(H);//如果数组已经半满，扩大空间 
+	getchar();
+	gets(tname);
+	pos =hash(H,tname);//计算散列地址 
+	if(H->array[pos].state==Active)
+	{
+		if(strcmp(tname,H->array[pos].name)==0)
+		{
+			printf("该联系人已经存在!");
+			return false;
+		}
+	}
+	//pos =hash(H,tname); 
+	if(H->array[pos].state!=Active){ //找到空单元，插入 
+		printf("请输入要添加的人的电话:\n");
+		strcpy(H->array[pos].name,tname);
+		gets(H->array[pos].phone);
+		printf("请输入要添加的人的地址:\n");
+		gets(H->array[pos].address);
+		H->array[pos].state=Active;
+		++H->load;//新插入一个元素，负载因子++ 
+		printf("添加成功!\n");
+		return true;
+	}
+	else pos=(pos+2*(++collisionNum)-1)%H->size; //已存在则计算下一地址 
+	return false;
+}   
+ 
+int insertbyphone (HashTable *H)  
+{  
+	char tphone[18]; 
+    int pos,collisionNum = 0; //碰撞次数
+	printf("请输入要添加的人的电话：");
+	if(H->load*2>=H->size)
+		doubleSpacebyphone(H);//如果数组已经半满，扩大空间 
+	getchar();
+	gets(tphone);
+	pos =hash(H,tphone); //计算散列地址 
+	if(H->array[pos].state==Active)
+	{
+		if(strcmp(tphone,H->array[pos].phone)==0)
+		{
+			printf("该联系人已经存在!");
+			return false;
+		}
+	} 
+	if(H->array[pos].state!=Active){ //找到空单元，插入 
+		printf("请输入要添加的人的姓名:\n");
+		strcpy(H->array[pos].phone,tphone);
+		gets(H->array[pos].name);
+		printf("请输入要添加的人的地址:\n");
+		gets(H->array[pos].address);
+		H->array[pos].state=Active;
+		++H->load;//新插入一个元素，负载因子++ 
+		printf("添加成功!\n");
+		return true;
+	}
+	else pos=(pos+2*(++collisionNum)-1)%H->size; //已存在则计算下一地址 
+	return false;
+}
+
+void doubleSpacebyname(HashTable *H)
+{
+	int i;
+	Node *tmp=H->array;
+	int oldsize = H->size;
+	H->size= nextPrime(oldsize*2);//找大于2倍表长的最小素数 
+	H->load = 0;
+	H->array =(Node *)malloc(sizeof(Node *));
+	for(i=0;i<oldsize;i++)
+		if(tmp[i].state==Active)
+			insertbyname(H);
+	free(tmp);
+}
+ 
+void doubleSpacebyphone(HashTable *H)
+{
+	int i;
+	Node *tmp=H->array;
+	int oldsize = H->size;
+	H->size= nextPrime(oldsize*2);//找大于2倍表长的最小素数 
+	H->load = 0;
+	H->array =(Node *)malloc(sizeof(Node *));
+	for(i=0;i<oldsize;i++)
+		if(tmp[i].state==Active)
+			insertbyphone(H);
+	free(tmp);
+}
+
+int removebyname (HashTable *H)  
+{
+	char tname[18]; 
+   	int initPos,pos;
+	int collisionNum = 0; //碰撞次数
+	printf("请输入要删除的记录的姓名：");
+	getchar();
+	gets(tname);
+	initPos = pos =hash(H,tname);
+	do{//遍历整个数组寻找被删元素 
+		if(H->array[pos].state==Empty)return false;//没找到 
+		if(H->array[pos].state==Active)//找到 
+		{
+			H->array[pos].state=Deleted;
+			--H->load;//元素被删除，负载因子-- 
+			printf("删除成功!\n");
+			return true;
+		}
+		pos=(pos+2*(++collisionNum)-1)%H->size;
+	}while(pos!=initPos);
+	return false;
+}  
+
+int removebyphone (HashTable *H)  
+{
+	char tphone[18]; 
+   	int initPos,pos;
+	int collisionNum = 0; //碰撞次数
+	printf("请输入要删除的记录的姓名：");
+	getchar();
+	gets(tphone);
+	initPos = pos =hash(H,tphone);
+	do{//遍历整个数组寻找被删元素 
+		if(H->array[pos].state==Empty)return false;//没找到 
+		if(H->array[pos].state==Active)//找到 
+		{
+			H->array[pos].state=Deleted;
+			--H->load;//元素被删除，负载因子-- 
+			printf("删除成功!\n");
+			return true;
+		}
+		pos=(pos+2*(++collisionNum)-1)%H->size;
+	}while(pos!=initPos);
+	return false;
+}  
+
+int searchbyname (HashTable *H)
+{   
+	char tname[18];
+	int pos,collisionNum = 0; //碰撞次数
+	printf("请输入要查询的姓名：");
+	getchar();
+	gets(tname);
+	pos =hash(H,tname);
+	if(H->array[pos].state==Empty) {//没找到 
+		printf("该记录不存在!\n");
+		return false;
+	}
+	if(H->array[pos].state==Active){
+		if(strcmp(tname,H->array[pos].name)==0){
+			printf("您所查找的信息：姓名：%s,电话：%s,地址：%s",
+			H->array[pos].name,H->array[pos].phone,H->array[pos].address);
+		 	return true;
+		} 
+	 	
+	 	else pos=(pos+2*(++collisionNum)-1)%H->size;
+	}
+	printf("该记录不存在!\n");
+	return false;
+}  
+ 
+int searchbyphone (HashTable *H)
+{   
+	char tphone[18];
+	int pos,collisionNum = 0; //碰撞次数
+	printf("请输入要查询的电话：");
+	getchar();
+	gets(tphone);
+	pos =hash(H,tphone);
+	if(H->array[pos].state==Empty) {//没找到 
+		printf("该记录不存在!\n");
+		return false;
+	}
+	if(H->array[pos].state==Active){
+		if(strcmp(tphone,H->array[pos].phone)==0){
+			printf("您所查找的信息：电话：%s,姓名：%s,地址：%s",
+			H->array[pos].phone,H->array[pos].name,H->array[pos].address);
+		 	return true;
+		} 
+	 	
+	 	else pos=(pos+2*(++collisionNum)-1)%H->size;
+	}
+	printf("该记录不存在!\n");
+	return false;
+}  
+
+
+void listbyname(HashTable *H) //显示以姓名为关键字形成的列表
+{
+	int i;
+	for(i=0;i<31;i++)
+		if(H->array[i].state == Active)
+			printf("您所查找的信息为: 姓名：%s,电话：%s,地址：%s\n",H->array[i].name,H->array[i].phone,H->array[i].address);
+} 
+ 
+void listbyphone(HashTable *H) //显示以电话为关键字形成的列表
+{
+	int i;
+	for(i=0;i<31;i++)
+		if(H->array[i].state == Active)
+			printf("您所查找的信息为: 电话：%s,姓名：%s,地址：%s\n",H->array[i].phone,H->array[i].name,H->array[i].address);
+} 
+
+void open(HashTable *H)//打开文件
+{
+	int i;
+	char str[N];
+	FILE* fp;
+	if((fp=fopen("E:\\output.txt","r"))!=NULL)
+	{
+		while(fgets(str,N,fp)!=NULL)
+		{
+			printf("%s",str);
+		}
+	}
+	else
+		printf("文件为空!");
+	fclose(fp);
+}
+
+
+void save(HashTable *H)//保存用户信息
+{
+	int i;
+	FILE* fout;
+	if((fout=fopen("E:\\output.txt","a"))!=NULL)
+	{
+		for(i=0;i<31;i++)
+			if(H->array[i].state == Active)
+				fprintf(fout,"姓名:%s,电话:%s,地址:%s\n",
+				H->array[i].name,H->array[i].phone,H->array[i].address);
+	}
+	fclose(fout);
+}
+ 
+void Exit()
+{
+	printf("\nThank you for using this system!\n");
+	system("pause");
+	exit(0);
+}
+ 
+void DisplayMenu()
+{
+	system("cls");//显示主界面前先清屏 
+	printf("***********欢迎进入电话号码查询系统************\n");
+	printf("*          0.打开以保存的记录                 *\n");
+	printf("*          1.以姓名为关键字添加记录           *\n");
+	printf("*          2.以电话为关键字添加记录           *\n");
+	printf("*          3.删除以姓名为关键字的记录         *\n");
+	printf("*          4.删除以电话为关键字的记录         *\n");
+	printf("*          5.查找以姓名为关键字的记录         *\n");
+	printf("*          6.查找以电话为关键字的记录         *\n");
+	printf("*          7.显示以姓名为关键字的记录         *\n");
+	printf("*          8.显示以电话为关键字的记录         *\n");
+	printf("*          9.保存记录                         *\n");
+	printf("*          10.退出系统                        *\n");
+	printf("**********************************************\n");
+	
+}
+ 
+int main() {
+	HashTable *H;
+	int option,i,n;
+	H=(HashTable *)malloc(sizeof(HashTable));
+	initializeTable(H);
+	DisplayMenu();
+	while(1)
+	{
+		printf("\n请输入您想执行的功能对应的数字：");
+		scanf("%d",&option);
+		switch(option)
+		{
+			case 0:
+				open(H);
+				break;
+			case 1:
+				{
+					printf("请输入要添加的人数:");
+					scanf("%d",&n);
+					for(i=1;i<=n;i++)
+						insertbyname(H);
+					break;
+				}
+			case 2:
+				{
+					printf("请输入要添加的人数:");
+					scanf("%d",&n);
+					for(i=1;i<=n;i++)
+						insertbyphone(H);
+					break;
+				}
+			case 3:
+				removebyname(H);
+				break;
+			case 4:
+				removebyphone(H);
+				break;
+			case 5:
+				searchbyname(H);
+				break;
+			case 6:
+				searchbyphone(H);
+				break;
+			case 7:
+				listbyname(H);
+				break;
+			case 8:
+				listbyphone(H);
+				break;
+			case 9:
+				save(H);
+				printf("已保存至\"output.txt\"中");
+				break;
+			case 10:Exit();
+				return 0;
+		}
+	}
+	return 0;
+}
