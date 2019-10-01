@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+void printDec2Bin(int num)
+{
+	int arr[32] = {0};
+	int index = 0;
+	// 从低位到高位输出各位数字 
+	printf("low to height : ");
+	while (num != 0)
+	{
+		printf("%d ", num & 1);
+		arr[index++] = num & 1;
+		num >>= 1;
+	}
+	printf("\n");
+
+
+	// 从高位到低位输出各位数字 
+	printf("height to low : ");
+	for (int i = index - 1; i >= 0; --i)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
+}
+
+
+int main(int argc, char const *argv[])
+{
+	int num = 0;
+	printf("input > ");
+	scanf("%d", &num);
+
+	printDec2Bin(num);
+
+	return 0;
+}
