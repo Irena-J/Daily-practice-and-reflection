@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<head>
+</meta>
+<tille>创建标签</tille>
+</head>
+<body>
+<img scr="Download1.png">
+<img src="Download1.png" width="128px" height="128px">
+<a herf="Down.html">
+    <a herf="Down.html" target="_blank">
+<img src="Downloan1.png" width="121px" height="121px" alt="下载">  当你的原图片被删除了，那么你可以通过这个按钮找到地址下载
+</a>
+</a>
+
+<img src="time.jpg" usemap="#map1">  <!--必须记得加#才能导入到-->
+<!--创建分区响应图应首先必须要有img元素，并img元素中必须包含src属性和usename属性-->
+<form>
+<input type="image" src="time.jpg">
+</form>
+<map name="map1">   创建分区响应的关键元素，一定要设置name属性，name属性值就是usename的属性值(usename前面记得加#)
+    <area href="time.html" shape="rect" coords="38,62,174,200" target="_blank">
+    <area herf="wheather.html">
+    <area herf="time.html" shape="rect" coords="227,62,364,200"target="_blank">
+    <area>  <!--在map里可以有多个area元素，并且每个元素必须指定其shape值，除shape值为default时还要添加coords值-->
+    <area>  <!--第二块点击区域，一般来说使用分区相应图都有多个area元素-->
+    <area>
+</map>    <!--Map元素结束-->
+<img src="Download.png" width="128" usemap="#map2">
+<map name="map2">
+    <area herf="Down2.html" shape="circle" coords="64px,64px,64px" target="_blank" >
+</map>
+<a target="_blank" herf="Down.html">
+<img src="Downdload1.png" width="128">
+</a>
+</body>
+</html>>
+
+<!DOCTYPE html>
+<html lang ="en">
+<meta charset="UTF-8">
+</meta>
+<head>
+    <tille>在HTML中嵌入视频</tille>
+</head>
+<body>
+
+<video scr="小黑的歌曲.mp4"height="500px" controls>
+</video>
+
+<video scr="小黑的歌曲.mp4"height="500px" controls preload="auto">       <!--会全部载入-->
+    <sourse src="小黑的MV.mp4" type="vedio/mp4">  <!--如果src里面的这种格式播放不出来，他会自动跳转到这个格式的-->
+</video>                一般支持老版的浏览器不支持MP4就需要用到这个了，但是有的不支持html就只能用插件了。
+
+<video scr="小黑的歌曲.mp4"height="500px" controls preload="metadata">   <!--会载入第一帧-->
+</video>
+
+<video scr="小黑的歌曲.mp4"height="500px" controls preload="none">   <!--需要手动点击播放-->
+</video>
+
+</body>
+</html>
