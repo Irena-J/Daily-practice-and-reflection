@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建css选择器</title>
+    <style type ="text/css">
+        *{      /*所有元素*/
+            font-size:40px;
+            color:#354cff;
+        }
+        .classs1{
+            font-size:40px;
+            color:#354cff;
+        }
+
+        .id1{
+        font-size:40px;
+        color:#354cff;
+        }
+        [href]{
+            font-size:80px;
+            color: #ffadff;
+        }
+        a:hover{
+            font-size:80px;
+            color:#ffadff;
+        }
+        .class2{
+            width:50px;
+            height:50px;
+            corder:1px solid black;
+            backgrouand-color:antiquewhite;
+            border-radius:10px/10px;
+        }
+        </style>
+
+</head>
+<body>
+<a href="1020css.html"></a>
+<a class="class1"></a>    /*class是一个全局属性*/
+<a class="class1"></a>      <!--只要是一样的类都会使用到这个-->
+<a id="id1">小黑</a>      <!--只能出现一次，唯一标识-->
+</body>
+</html>

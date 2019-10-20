@@ -1,0 +1,171 @@
+<!DOCTYPE html> <!--doctype元素，独一无二的，必须以这个开头，浏览器根据这个知道是处理html的内容，现在ctl /注释-->
+<html lang="en">    <!--根元素，文档中html部分的开始，让浏览器直到这是开始的-->
+<head>  <!--包含源数据，提供有关文档内容和标注信息的，头元素-->
+    <meta charset="UTF-8">  <!-- meta元素，给浏览器多次访问的，charset：整个网页以什么方式编码的-->
+    </meta>
+    <title>Title</title>        <!--有head必须要有Title，网页名称//标题-->
+</head>
+<body>      <!--都是在网页里面可以输出的-->
+<form> <!-- 用于为用户输入表单的-->
+    <input type = "text">
+    <input type = "text" value="hello">     <!--value,相当于占位符-->
+    <input type = "text" placeholder = "hello">     <!--不占文本框内的-->
+    <input type = "text" placeholder = "maxlength" maxlength= "8" >  <!--表明最多只能输入八个,最大能输入的字符-->
+    <br><br>    <!--换行符，这里可以换两行-->
+    <input typ = "text" placeholder = "hello" size="50">    <!--拓宽单行文本框-->
+    <input type = "text" value="hello"readonly>     <!--只读文本框-->
+    <input type ="password" placeholder = "密码">     <!--加密输出--><!--注意这里密码登陆之后后面才会显示-->
+    <textarea> rows ="20"</textarea>
+</form>
+<h1>标题<hi> <!-- 放大标题-->
+</body>
+</html> <!--文档中html部分的结束-->
+
+
+<!--第八节课-->
+<!DOCTYPE html>
+<html lang = "en">
+<!--网页标题部分，包括转码-->
+<head>
+    <meta chaset = UTF-8>
+    </meta>
+    <tille>第八节课</tille>
+</head>
+
+<body>
+<form>
+    <input type = button value = "按钮">
+    <button>按钮</button>        <!-- js合作并且作为绑定事件的-->
+    <input type = "submit" value = "提交">    <!--提交表单，获取用户输的值-->
+    <input type = "range" min = "-100" max = "500"step ="100">
+    <input type = "range" min = "-100" max = "500"step ="100" value ="-100">    <!--范围条，数字滑动-->
+    <input type = "number">     <!--通过手动输入的大小来调整范围-->
+    <input type = "number" min = "-100" max ="100" value ="0">  <!--限制的最大最小范围-->
+    <input type ="checkbox">        <!--选择,选中可以取消-->
+    <input type ="radio">   <!--选择后不能取消-->
+    程序员中最帅的是
+    <br>
+    <input type="radio">小黑
+    <input type="radio">小黑
+    <input type="radio">小黑
+    <br><br>
+    <input type="radio" name="a">小黑
+    <input type="radio" name="a">小黑
+    <input type="radio" name="a">小黑    <!--完成一个三选一的过程-->
+    <br><br>
+    <input type="radio" name="a"checked>小黑   <!--checked属性无属性值，指网页进入时默认选中的选项-->
+    <input type="radio" name="a">小黑             <!--只能选择一个-->
+    <input type="radio" name="a">小黑
+    <select>                            <!--只能选择文本框中有的东西-->
+        <option>苹果</option>
+        <option>西瓜</option>
+        <option>香蕉</option>
+    </select>
+
+    <input type="text" list="datalist1">    <!--可以增加自己想加入的内容-->
+    <datalist id="datalist1">    <!--注意这个元素是包含在form标签里面的-->
+        <option>苹果</option>    <!--必须搭配单行文本框使用，否则没有任何的效果-->
+        <option>西瓜</option>
+        <option>香蕉</option>
+    </datalist>
+</form>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta>
+<meta charset="UTF-8">
+</meta>
+<tille>最后一课</tille>
+</head>
+    <body>
+    <form>
+        <input type="email">
+        <input type="tel">
+        <input type="url">
+        <input type="date">  <!--获取时间-->
+        <input type="color">  <!--获取颜色-->
+        <input type="search">
+        <input type="hidden" value ="123">  <!--隐藏文本框-->
+        <input type="image" src="Download1.png">   <!--图片按钮的导入--><!--要先把图片下载到本地储存好，然后文件名保存好，这里要一致。-->
+        <input type="image" src="Download1.png" width="40px">
+        <input type="file">
+        <input type=file"multiple>  <!-- 一次允许上传多个文件-->
+        <input type="file"required>  <!--必须上传一个文件-->
+    </form>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<head>
+</meta>
+<tille>创建标签</tille>
+</head>
+<body>
+<img scr="Download1.png">
+<img src="Download1.png" width="128px" height="128px">
+<a herf="Down.html">
+    <a herf="Down.html" target="_blank">
+<img src="Downloan1.png" width="121px" height="121px" alt="下载">  当你的原图片被删除了，那么你可以通过这个按钮找到地址下载
+</a>
+</a>
+
+<img src="time.jpg" usemap="#map1">  <!--必须记得加#才能导入到-->
+<!--创建分区响应图应首先必须要有img元素，并img元素中必须包含src属性和usename属性-->
+<form>
+<input type="image" src="time.jpg">
+</form>
+<map name="map1">   创建分区响应的关键元素，一定要设置name属性，name属性值就是usename的属性值(usename前面记得加#)
+    <area href="time.html" shape="rect" coords="38,62,174,200" target="_blank">
+    <area herf="wheather.html">
+    <area herf="time.html" shape="rect" coords="227,62,364,200"target="_blank">
+    <area>  <!--在map里可以有多个area元素，并且每个元素必须指定其shape值，除shape值为default时还要添加coords值-->
+    <area>  <!--第二块点击区域，一般来说使用分区相应图都有多个area元素-->
+    <area>
+</map>    <!--Map元素结束-->
+<img src="Download.png" width="128" usemap="#map2">
+<map name="map2">
+    <area herf="Down2.html" shape="circle" coords="64px,64px,64px" target="_blank" >
+</map>
+<a target="_blank" herf="Down.html">
+<img src="Downdload1.png" width="128">
+</a>
+</body>
+</html>>
+
+<!DOCTYPE html>
+<html lang ="en">
+<meta charset="UTF-8">
+</meta>
+<head>
+    <tille>在HTML中嵌入视频</tille>
+</head>
+<body>
+
+<video scr="小黑的歌曲.mp4"height="500px" controls>
+</video>
+
+<video scr="小黑的歌曲.mp4"height="500px" controls preload="auto">       <!--会全部载入-->
+    <sourse src="小黑的MV.mp4" type="vedio/mp4">  <!--如果src里面的这种格式播放不出来，他会自动跳转到这个格式的-->
+</video>                一般支持老版的浏览器不支持MP4就需要用到这个了，但是有的不支持html就只能用插件了。
+
+<video scr="小黑的歌曲.mp4"height="500px" controls preload="metadata">   <!--会载入第一帧-->
+</video>
+
+<video scr="小黑的歌曲.mp4"height="500px" controls preload="none">   <!--需要手动点击播放-->
+</video>
+
+</body>
+</html>
+
+
+
+
+
+
