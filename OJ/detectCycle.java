@@ -1,3 +1,5 @@
+
+//时间复杂度最佳
 public ListNode detectCycle(ListNode head) {
         if(head == null || head.next == null){
             return null;
