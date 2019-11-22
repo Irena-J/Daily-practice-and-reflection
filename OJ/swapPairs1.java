@@ -14,3 +14,4 @@ public ListNode swapPairs(ListNode head) {
     }
 	
 方法二：机械的交换两个节点,可以参考链表的反转，这种消耗就比较大
+
