@@ -86,3 +86,22 @@ class Solution {
        return node.next;
     }
 }
+//删除链表中的非尾节点
+public void dele(ListNode node){	//	传入要删除的节点
+	node.val = node.next.val;
+	node.next = node.next.next;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
