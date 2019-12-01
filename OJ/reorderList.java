@@ -46,3 +46,32 @@ private ListNode reverseList(ListNode head) {
     return tail;
 }
 
+//问题代码
+public void reorderList(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        if(slow != null){
+        ListNode p = slow.next;
+        while(p != null){
+            ListNode pNext = p.next;
+            slow.next = null;
+            p.next = slow;
+            slow = p;
+            p = pNext;
+        }
+        
+        ListNode cur = slow;
+        ListNode newHead = head;
+        while(cur.next != null){
+            ListNode curNext = cur.next;
+            cur.next = newHead.next;
+            newHead.next = cur;
+            newHead = cur.next;
+            cur = curNext;
+        }
+        }
+    }
