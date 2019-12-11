@@ -17,3 +17,10 @@ public int compareTo(String str2){
 	}
 	return len1 - len2;
 }
+//多次拆分
+String str = "name=zhangsan&age=19";
+String[] result = str.split("&");
+for(int i = 0;i<result.length;i++){
+	String[] temp = result[i].split("=");
+	System.out.println(temp[0]+"="+temp[1]);
+}
