@@ -46,6 +46,23 @@ public class RandomDemo{
 	}
 }
 
+public class HashSetDemo{
+	public static void main(String[] args){
+		//创建随机对象
+		Random r = new Random();
+		//创建一个Set集合
+		HashSet<Integer> ts = new HashSet<Integer>();
+		//判断集合的长度是不是小于10
+		while(ts.size() < 10) {
+			int num = r.nextInt(20) + 1;
+			is.add(num);
+		}
+		for(Integer i : ts){
+			System.out.println(s);
+		}
+	}
+}
+
 
 
 
