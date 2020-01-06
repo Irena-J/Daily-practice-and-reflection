@@ -27,7 +27,8 @@ sno char(9),
 cno char(4),
 grade smallint,
 primary key(sno,cno),
-foreign key(cno)references c(cno)
+foreign key(cno)references c(cno),
+foreign key(sno)references s(sno)
 );
 
 
