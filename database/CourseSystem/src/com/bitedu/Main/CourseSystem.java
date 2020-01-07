@@ -13,6 +13,7 @@ public class CourseSystem {
         stu.setSno(2020001);
         insertStudent(stu);
         selectStudent(2020001);
-        selectStudent(70);//查询成绩大于70分的
+        Take ta = selectStudent(70);//查询成绩大于70分的
+		System.out.println(ta);
     }
 }
