@@ -30,5 +30,8 @@ public class Student {
     public void setClassid(int classid) {
         this.classid = classid;
     }
+	public Student toString(){
+		return "sno="+sno+"name="+name+"classid="+classid;
+	}
 
 }
