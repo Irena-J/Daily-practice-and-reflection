@@ -56,3 +56,36 @@ HashMap<Integer,String>
 			}
 		}
 	}
+	
+	HashMap<String,Student>
+
+键：String
+值：Student
+
+	public class HashDemo3 {
+		public static void main(String[] args) {
+			//创建集合对象
+			HashMap<String,Student> hm = new HashMap<String,String>();
+			
+			//创建学生集合对象
+			Student s1 = new Student("the shy",19);
+			Student s2 = new Student("rookie",21);
+			Student s3 = new Student("leyan",18);
+			
+			//添加元素
+			hm.put("202001",s1);
+			hm.put("202002",s2);
+			hm.put("202003",s3);
+			hm.put("202004",s4);
+			
+			//遍历
+			Set<String> set = hm.keySet();
+			for(String key : set) {
+				//注意此时键对应的值的类型是什么
+				Student value = hm.get(key);
+				//注意这里的访问记得要重写toString()或者调用访问器方法
+				System.out.println(key+"--"+value.getName()+"--"+value.getAge());
+			}
+		}
+	}
+	
