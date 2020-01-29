@@ -17,3 +17,25 @@ class Tolower {
         return str2;
     }
 }
+
+方式二：
+class Solution {
+    public String toLowerCase(String str) {
+        String s="";
+        for(int i=0;i<str.length();i++)
+        {   
+            char a=str.charAt(i);
+            a=tolowercase(a);
+            s+=a;
+        }
+        return s;
+    }
+    private char tolowercase(char t)
+    {
+        if(t>='A' && t<='Z')
+        {
+            t=(char)(t+32);
+        }
+        return t;
+    }
+}
