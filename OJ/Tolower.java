@@ -39,3 +39,16 @@ class Solution {
         return t;
     }
 }
+
+增强for
+	public String toLowerCase(String str) {
+		StringBuffer sb = new StringBuffer();
+		for(char ch : str.toCharArray()) {
+			if(ch >= 'A' && ch <= 'Z') {
+				sb.append((char)(ch + 32));
+			} else {
+				sb.append(ch);
+			}
+		}
+		return sb.toString();
+	}
