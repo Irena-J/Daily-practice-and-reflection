@@ -25,6 +25,8 @@
             lang(){
                 //console.log(this.msg)拿到字符
                 //this代表当前实例
+
+                if(this.intervalId != null) return;
                 this.intervalId = setInterval(()=>{
                     //从0索引处开始截取一个字符
                     var start = this.msg.substring(0,1)
