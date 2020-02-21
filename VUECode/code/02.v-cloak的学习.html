@@ -25,20 +25,23 @@
     <div>{{msg2}}</div>
     <div v-text="msg2"></div>
     <div v-html="msg2">1212112</div>
+    <!-- 可以解决闪烁问题和避免除占位符附近的标签清空 -->
 
-    <!-- v-bind: 是 Vue中，提供的用于绑定属性的指令 -->
-    <!-- <input type="button" value="按钮" v-bind:title="mytitle + '123'"> -->
-    <!-- 注意： v-bind: 指令可以被简写为 :要绑定的属性 -->
-    <!-- v-bind 中，可以写合法的JS表达式 -->
-
-    <!-- Vue 中提供了 v-on: 事件绑定机制 -->
-    <!-- <input type="button" value="按钮" :title="mytitle + '123'" v-on:click="alert('hello')"> -->
-
-
-    <input type="button" value="按钮" @click="show">
+    <!-- v-bind：是Vue中，提供的用于绑定属性的命令 -->
+    <!-- v-bind指令可以被简写为 ：要绑定的属性 -->
+    <!-- <input type = "button" value ="按钮" v-bind:title=“mytitle”> -->
+    
+    <!-- v-bind中可以写合法的JS表达式 -->
+    <!-- <input type = "button" value = "按钮"：title= "mytitle+'abd'"> -->
+  
+    <!-- Vue中提供了v-on: 事件绑定机制 -->
+    <!-- mouseover鼠标覆盖 -->
+    <!-- click点击弹出 -->
+    <input type = "button" value = "按钮" v-on:mouseover="show">
+    <input type = "button" value = "按钮" @click="show">
+  
   </div>
-
-
+  
   <script src="./lib/vue-2.4.0.js"></script>
 
   <script>
@@ -47,30 +50,23 @@
       data: {
         msg: 'abc',
         msg2: '<h1>一个大标签</h1>',
-        mytitle: '这是一个自己定义的title'
+        mytitle:'一个自定义的title',
       },
-      methods: { // 这个 methods属性中定义了当前Vue实例所有可用的方法
-        show: function () {
-          alert('Hello')
+      methods:{ //这个methods属性中定义了当前Vue实例所有可用的方法
+          show: function () {
+            alert("点击按钮后弹出")
+          }
         }
-      }
     })
 
-
-    /* document.getElementById('btn').onclick = function(){
-      alert('Hello')
-    } */
   </script>
 </body>
 
 </html>
 
-
-
-
-<!-- 1. 如何定义一个基本的Vue代码结构 -->
-<!-- 2. 插值表达式 和  v-text   -->
-<!-- 3. v-cloak -->
-<!-- 4. v-html -->
-<!-- 5. v-bind   Vue提供的属性绑定机制   缩写是 : -->
-<!-- 6. v-on     Vue提供的事件绑定机制   缩写是 @ -->
+<!-- 如何定义一个基本的Vue代码结构 -->
+<!-- 插值表达式和 v-text -->
+<!-- v-cloak -->
+<!-- v-html -->
+<!-- v-bind 缩写是 ： Vue提供的属性绑定机制 -->
+<!-- v-on Vue 缩写是@  提供事件绑定机制 -->

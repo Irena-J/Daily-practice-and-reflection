@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="learn">
+        //
+    <input type = "button" value = "按钮" v-on:mouseover="fun">
+    </div>
+    <script src="./lib/vue-2.4.0.js"></script>
+  <script>
+      var vm = new Vue({
+          el: '#learn',
+          data:{
+             num:0,
+          },
+          methods:{
+            fun(){
+                this.num = num+1
+            }      
+          }
+      })
+    </script>
+</body>
+</html>

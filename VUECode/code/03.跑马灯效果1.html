@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type = "button" value = "稳住" v-on:click="stop">
+    <input type = "button" value = "浪起" @click="lang">  
+    <h2>{{msg}}</h2>
+  </div>
+  <script src="./lib/vue-2.4.0.js"></script>
+<script>
+    //在vm实例中如果要获取data上的数据，或者要调用methods中的方法，必须通过this.数据属性名或
+   // this.方法名方法，这里的this，就表示我们new出来的vm实例
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            msg:'稳住恰石头人，别浪---！',
+            intervalId: null  //在data上定义定时器Id
+        },
+        methods:{
+            lang(){
+                //console.log(this.msg)拿到字符
+                //this代表当前实例
+                this.intervalId = setInterval(()=>{
+                    //从0索引处开始截取一个字符
+                    var start = this.msg.substring(0,1)
+                    //获取到后买你的所有字符
+                    var end = this.msg.substring(1)
+                    //重新拼接得到的新的i负环，并复制给this.msg
+                    this.msg = end + start
+                },400)
+               //注意：vm实例，会监听自己身上data中所有数据的改变 ，一旦数据变化，会自动
+               //将最新数据从data上同步到页面上，这样程序员就只关心数据，不需要考虑如何重新渲染DOM页面
+            },
+            stop(){ //停止定时器
+                clearInterval(this.intervalId)
+            }
+        }
+    })
+
+    //分析：
+    //1. 给 浪起 按钮，绑定一个点击事件，v-on
+    //2. 在按钮的事件处理函数中写相关的业务逻辑代码：拿到msg字符串，然后做截取操作，调用substring来进行字符串的截取操作，把第一个字符截取出来，放到最后一个位置
+    //3. 为了实现自动截取的功能，需要把
+</Script>
+    
+</body>
+</html>
