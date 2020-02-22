@@ -6,17 +6,41 @@
     <title>Document</title>
     <!-- 导入Vue的包 -->
     <script src="./lib/vue-2.4.0.js"></script>
+
+    <style>
+    .inner {
+        height:150px;
+        background-color:darkcyan;
+    }
+    </style>
 </head>
 <body>
-    <div id = "app"></div>
+    <div id = "app">
+        <!-- 受到冒泡机制的影响，会先触发按钮再触发inner -->
+        <!-- .stop修饰符会阻止冒泡事件的发生 -->
+        <!-- <div class = "inner" @click="divlHandler">
+            <input type = "button" value="点击" @click.stop="btnHandler"> -->
+
+        <!-- 使用 .prevent 阻止默认行为 -->
+        <a href = "http://www.baidu.com"@click.prevent="linkClick">有问题先百度</a>
+    </div>
 
     <script>
         //创建一个vm实例
         var vm = new Vue({
             el:'#app',
             data:{},
-            methods:{},
-        })
+            methods:{
+                divlHandler(){
+                    //console.log('这是触发了innner div的点击事件')
+                },
+                btnHandler(){
+                    //console.log('这是触发了 btn 按钮的点击事件')
+                }
+            }
+        });
     </script>
 </body>
 </html>
+<!-- console对象用于JavaScript调试，JavaScript原生中默认是没有console对象，这是宿主对象(也就是浏览器)提供的内置对象 -->
+<!-- 用于访问调试控制台，不同浏览器效果可能不同  log() 输出信息 -->
