@@ -15,16 +15,30 @@
     </style>
 </head>
 <body>
+    <!-- 所有的事件修饰符是可以串联的 -->
     <div id = "app">
-        <!-- 受到冒泡机制的影响，会先触发按钮再触发inner -->
-        <!-- .stop修饰符会阻止冒泡事件的发生 -->
+
+        <!-- 受到冒泡机制的影响，触发按钮后会直接触发inner(就是里面的代码执行后外面的自动执行并且里面的先执行) -->
+        <!-- .stop修饰符会阻止冒泡事件的发生，点谁谁执行不牵扯别的 -->
         <!-- <div class = "inner" @click="divlHandler">
             <input type = "button" value="点击" @click.stop="btnHandler"> -->
 
-        <!-- 使用 .prevent 阻止默认行为 -->
-        <a href = "http://www.baidu.com"@click.prevent="linkClick">有问题先百度</a>
-    </div>
+        <!-- 使用 .prevent 阻止默认行为，阻止跳转 -->
+        <!-- 使用 .once 只触发一次事件处理函数 -->
+        <!-- <a href = "http://www.baidu.com"@click.prevent.once="linkClick">有问题先百度</a>-->
+        
+        
+        <!-- 使用 .capture 实现捕获触发事件的机制，从外往里,当我们点按钮，inner会先执行再执行按钮部分-->
+        <!-- 就是说一旦点击内层代码部分外层必定会先执行再是内部，当然单纯点击外部代码不会影响内部的 -->
+        <!-- <div class = "inner" @click.capture= "divlHandler">
+            <input type = "button" value = "点击" @click = "btnHandler">
+            </div> -->
 
+            <!-- 用self修饰的只有点击后才触发，不会受冒泡或捕获影响 -->
+             <!-- <div class = "inner" @click.self= "divlHandler">
+                <input type = "button" value = "点击" @click = "btnHandler">-->
+        
+            </div>
     <script>
         //创建一个vm实例
         var vm = new Vue({
@@ -32,10 +46,10 @@
             data:{},
             methods:{
                 divlHandler(){
-                    //console.log('这是触发了innner div的点击事件')
+                    console.log('这是触发了inner div的点击事件')
                 },
                 btnHandler(){
-                    //console.log('这是触发了 btn 按钮的点击事件')
+                    console.log('这是触发了 btn 按钮的点击事件')
                 }
             }
         });
@@ -44,3 +58,6 @@
 </html>
 <!-- console对象用于JavaScript调试，JavaScript原生中默认是没有console对象，这是宿主对象(也就是浏览器)提供的内置对象 -->
 <!-- 用于访问调试控制台，不同浏览器效果可能不同  log() 输出信息 -->
+<!-- .stop 和 .self的区别 就是一个会阻止所有的冒泡机制，后者只负责阻止自己的冒泡行为，之后再外层代码的冒泡机制并不能阻止并不能阻止 -->
+<!-- .capture 实现捕获触发事件 就是一旦外层代码执行，内层的都会执行，单纯的点击内层的，外层的并不会受影响 -->
+<!-- .prevent 阻止默认事件的发生，阻止跳转 -->
