@@ -36,20 +36,24 @@
             methods:{
                 calc(){ //计算器算术方法
                     //逻辑
-                    switch(this.opt) {
-                        case '+':
-                            this.result = parseInt(this.n1) + parseInt(this.n2)
-                            break;
-                        case '-':
-                            this.result = parseInt(this.n1) - parseInt(this.n2)
-                            break;
-                        case '*':
-                            this.result = parseInt(this.n1) * parseInt(this.n2)
-                            break;
-                        case '/':
-                            this.result = parseInt(this.n1) / parseInt(this.n2)
-                            break;
-                    }
+                    // switch(this.opt) {
+                    //     case '+':
+                    //         this.result = parseInt(this.n1) + parseInt(this.n2)
+                    //         break;
+                    //     case '-':
+                    //         this.result = parseInt(this.n1) - parseInt(this.n2)
+                    //         break;
+                    //     case '*':
+                    //         this.result = parseInt(this.n1) * parseInt(this.n2)
+                    //         break;
+                    //     case '/':
+                    //         this.result = parseInt(this.n1) / parseInt
+                    //         break;
+                    // }
+
+                    //比较投机取巧的方式 少用
+                    var codeStr = 'parseInt(this.n1) + this.opt + parseInt(this.n2)'
+                        this.result = eval(codeStr) 
                 }
             }
         });
