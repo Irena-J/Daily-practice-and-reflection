@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src = "./lib/vue-2.4.0.js"></script>
+    
+    <style>
+        .red {
+            color:red;
+        }
+
+        .thin {
+            font-weight:200;
+        }
+
+        .italic {
+            font-style:italic;
+        }
+
+        .active {
+            /* 间隔 */
+            letter-spacing:0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id = "app">h
+        <!-- <h1 class = "red thin">一个大写的暴击H1<h1>-->
+
+        <!-- 第一种使用方式，直接传递一个数组，注意这里的class需要使用 v-bind做数据绑定 -->
+        <!-- <h1 : class = "['thin','italic']">这是一个瘦的H1</h1> -->
+        
+        <!-- 在数组中使用三元表达式 -->
+        <!-- <h1 : class = "['thin','italic',flag?'active':'']">这是采用了三元表达式的</h1> -->
+    
+        <!-- 在数组中使用对象提高可读性，数组里面前两个是类都会运用，第三个类通过一个对象，对象里面有键，键的这个值就是flag -->
+        <!-- <h1 : class = "['thin','italic',{'active'：flag}]">三元表达式比较麻烦，我们改成对象的形式</h1>-->
+
+        <!-- 在为class使用v-bind绑定 对象 的适合，对象那个的属性是类名，由于对象那个的属性可带可不带引号，所以 这里没有带，属性的值是标识符 -->
+        <h1 : class = "classObj">大括号内传递的对象前面是类名后面是标识符</h1>
+   
+    </div>
+
+    <script>
+        //创建Vum实例，得到ViewModel
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag:true,
+                classObj: {red:true,thin:true,italic:false,active:false}
+            },
+            methods:{}
+        })
+    </script>
+    
+</body>
+</html>
