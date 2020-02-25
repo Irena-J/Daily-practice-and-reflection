@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-HA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src = "./lib/vue-2.4.0.js"></script>
     <link rel="stylesheet" href = "./lib/bootstrap-3.3.7.css">
 </head>
+
 <body>
     <div id = "app">
+
+
        
         <!-- bs3-panel快捷键画出候选框  -->
         <div class="panel panel-primary">
@@ -18,15 +23,16 @@
             <div class = "panel-body from-inline">
                 <label>
                     Id:
-                    <input type="text" class="from-control">
+                    <!-- 需要vue管理，所以需要做双向数据绑定 -->
+                    <input type="text" class="from-control" v-moudel="id">
                 </label>
 
                 <label>
                     Name:
-                    <input type="text">
+                    <input type="text" class="from-control" v-moudel="name">
                 </label>
-
-                <input type="button" value="添加" class="btn btn-primary">
+                <!-- 注意，其实这个方法也可以不带括号，但是但括号就可以传参，所以建议带上 -->
+                <input type="button" value="添加" class="btn btn-primary" @click = "add()">
              </div>
         </div>
        
@@ -44,9 +50,9 @@
             <tr v-for ="item in list" :key="item.id">
                 <td>{{item.id}}</td>
                 <td v-text="item.name"></td>
-                <td>{{item.id}}</td>
+                <td>{{item.ctime}}</td>
                 <td>
-                    <a href="">删除</a>
+                    <a href="@click.prevent=">删除</a>
                 </td>
             </tr>
          </tbody>
@@ -56,16 +62,31 @@
     </div>
 
     <script>
+        // 创建Vue实例，得到ViewModel
         var vm = new Vue({
             el:"#app",
             data:{
+                id:'',
+                name:'',
                 list: [
-                    {id:1,name:'beijing',ctime:new Date()},
-                    {id:2,name:'baoma',ctime:new Date()},
+                    {id:1,name:'beijing', ctime: new Date()},
+                    {id:2,name:'baoma', ctime: new Date()},
 
-                ]
+                ],
             },
             methods:{
+                add () {    //添加的方法
+                    //分析：
+                    //1.获取到id和name，直接从data上获取
+                    //2.组织出一个对象
+                    //3.把这个对象那个，调用 数组 相关方法，添加到当前data上的list中
+                    //4.注意 在vue中，已经实现了数据的双向绑定，当我们修改了data中的数据，
+                    //  vue会默认监听到数据的改动，自动把最新的数据应用到页面上
+                    //5.其实更多的就是在进行vm中Model数据的操作，同时，在操作Moudel数据的时候，制定和业务逻辑操作
+                    var car = {id : this.id, name: this.name, ctime: new Date()}
+                    this.list.push(car)
+                    this.id = this.name = ''
+                }
 
             }  
         });
