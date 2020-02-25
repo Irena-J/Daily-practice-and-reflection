@@ -5,33 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src = "./lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href = "./lib/bootstrap-3.3.7.css">
 </head>
 <body>
     <div id = "app">
+       
+        <!-- bs3-panel快捷键画出候选框  -->
+        <div class="panel panel-primary">
+            <div class ="panel-heading">
+                <h3 class ="panel-title">品牌管理</h3>
+            </div>
+            <div class = "panel-body from-inline">
+                <label>
+                    Id:
+                    <input type="text" class="from-control">
+                </label>
+
+                <label>
+                    Name:
+                    <input type="text">
+                </label>
+
+                <input type="button" value="添加" class="btn btn-primary">
+             </div>
+        </div>
+       
+        <!-- 快捷键bs3-table画一个表，注意你快捷键的设置 -->
         <table class = "table table-bordered table-hover table-striped" >
             <thead>
                 <tr>
-                    <th></th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
                 </tr>
             </thead>
          <tbody>
-            <tr>
-                <tb></tb>
+            <tr v-for ="item in list" :key="item.id">
+                <td>{{item.id}}</td>
+                <td v-text="item.name"></td>
+                <td>{{item.id}}</td>
+                <td>
+                    <a href="">删除</a>
+                </td>
             </tr>
          </tbody>
         </table>
+
+
     </div>
 
     <script>
         var vm = new Vue({
             el:"#app",
             data:{
+                list: [
+                    {id:1,name:'beijing',ctime:new Date()},
+                    {id:2,name:'baoma',ctime:new Date()},
 
+                ]
             },
             methods:{
 
-            }
-        })
+            }  
+        });
         </script>
     
 </body>
