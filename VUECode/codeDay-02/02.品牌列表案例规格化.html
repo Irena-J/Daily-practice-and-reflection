@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-HA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src = "./lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet" href = "./lib/bootstrap-3.3.7.css">
+</head>
+
+<body>
+    <div id = "app">
+
+
+       
+        <!-- bs3-panel快捷键画出候选框  -->
+        <div class="panel panel-primary">
+            <div class ="panel-heading">
+                <h3 class ="panel-title">品牌管理</h3>
+            </div>
+            <div class = "panel-body from-inline">
+                <label>
+                    Id:
+                    <!-- 需要vue管理，所以需要做双向数据绑定 -->
+                    <input type="text" class="from-control" v-model="id">
+                </label>
+
+                <label>
+                    Name:
+                    <input type="text" class="from-control" v-model="name">
+                </label>
+                <!-- 注意，其实这个方法也可以不带括号，但是但括号就可以传参，所以建议带上 -->
+                <input type="button" value="添加" class="btn btn-primary" @click = "add()">
+             
+                <label>
+                    搜索关键字:
+                    <!-- 注意：Vue中素有的指令，在带哦用的时候都以 v- 开头 -->
+                    <input type="text" class="from-control" v-model="keywords">
+                </label>
+            </div>
+        </div>
+       
+        <!-- 快捷键bs3-table画一个表，注意你快捷键的设置 -->
+        <table class = "table table-bordered table-hover table-striped" >
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+         <tbody>
+             <!-- 之前v-for中的数据直接是从data渲染过来的， -->
+             <!-- 现在自定义了一个search方法，同时，把所有的关键字，通过传参的方式传递给search方法 -->
+             <!-- 在search方法内部，通过执行for循环，把所有符合搜索关键字的数据，保存到一个新数组中，返回 -->
+            <tr v-for ="item in search(keywords)" :key="item.id">
+                <td>{{item.id}}</td>
+                <td v-text="item.name"></td>
+                <td>{{item.ctime}}</td>
+                <td>
+                    <a href="" @click.prevent=del(item.id)>删除</a>
+                </td>
+            </tr>
+         </tbody>
+        </table>
+
+
+    </div>
+
+    <script>
+        // 创建Vue实例，得到ViewModel
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                id:'',
+                name:'',
+                keywords:'', //搜索的关键字
+                list: [
+                    {id:1,name:'beijing', ctime: new Date()},
+                    {id:2,name:'baoma', ctime: new Date()},
+
+                ],
+            },
+            methods:{
+                add () {    //添加的方法
+                    //分析：
+                    //1.获取到id和name，直接从data上获取
+                    //2.组织出一个对象
+                    //3.把这个对象那个，调用 数组 相关方法，添加到当前data上的list中
+                    //4.注意 在vue中，已经实现了数据的双向绑定，当我们修改了data中的数据，
+                    //  vue会默认监听到数据的改动，自动把最新的数据应用到页面上
+                    //5.其实更多的就是在进行vm中Model数据的操作，同时，在操作Moudel数据的时候，制定和业务逻辑操作
+                    var car = {id : this.id, name: this.name, ctime: new Date()}
+                    this.list.push(car)
+                    this.id = this.name = ''
+                },
+                del(id) {   //根据id删除数据
+                    //分析：
+                    //1.如何让根据Id，找到要删除这一项的索引
+                    //2.如果找到索引，直接调用 数组的 splice方法
+
+                    //方式1，借助于some
+                    // this.list.some((item,i)=>{
+                    //     if(item.id == id) {
+                    //         this.list.splice(i,1)
+                    //         //在数组的some方法中，如果return true，就会立即终止这个数组的后续循环
+                    //         return true;
+                    //     }
+                    // })
+
+                    //方式2
+                    var index = this.list.findIndex(item =>{
+                        if(item.id == id) {
+                            return true;
+                        }
+                    })
+                    this.list.splice(index,1)
+                    
+                },
+                //搜索
+                search(keywords) { //根据关键字，进行数据的搜索
+                    /* var newList =[]
+                    this.list.forEach(item => {
+                        // 注意空串也包含在内
+
+                        if (item.name.indexOf(keywords) != -1) {
+                           newList.push(item)
+                        }
+                    })
+                    return newList  */
+
+                    //注意：forEach(没办法被终止，但是some可以通过return true终止)  some  filter(过滤)  findIndex这些都属于数组的新方法，
+                    //都会对数组中的每一项进行遍历，执行相关的操作
+
+                   return this.list.filter(item => {
+                    // var new newList = this.list.filter    
+                    // if(item.name.indexOf(keywords) != -1)
+
+                        //注意：ES6中，为字符串提供了一个新方法，叫做String.prototype.include('要包含的字符串')
+                        //如果包含，则返回true，否则返回false
+                        //contain
+                        if (item.name.includes(keywords)) {
+                            return item
+                        }
+                    })
+                       // return newList
+                }
+            }
+        });
+
+        //过滤器的定义语法
+       // Vue.filter('过滤器的名称',function(){})
+       //过滤器中的function，第一个参数，已经被规定死了，永远都是过滤器管道符前面传递过来的数据
+       Vue.filter('过滤器的名称',function(data){
+        //这样就是每个后面都会加一个123  
+        return data + '123'
+       })
+        </script>
+    
+</body>
+</html>
+
+<!-- 过滤器的调用格式 {{ name | 过滤器的名称}} -->
