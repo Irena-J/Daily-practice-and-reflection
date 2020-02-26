@@ -27,7 +27,9 @@
 
                 <label>
                     Name:
-                    <input type="text" class="from-control" v-model="name">
+                    <!-- 注意这里一定要记得加上键盘修饰符，只有enter键点击后才会添加成功，否则只要摁键盘就会触发 -->
+                    <!-- .enter .tab .delete .s[ace .up .down .left .right 这些修饰符都是Vue提供的 -->
+                    <input type="text" class="from-control" v-model="name" @keyup.f2="add">
                 </label>
                 <!-- 注意，其实这个方法也可以不带括号，但是但括号就可以传参，所以建议带上 -->
                 <input type="button" value="添加" class="btn btn-primary" @click = "add()">
@@ -79,7 +81,7 @@
 
             //时间的格式 yyyy-mm-dd
             var y = dt.getFullYear()
-            var m = dt.getMonth() + 1
+            var m = (dt.getMonth() + 1)
             var d = dt.getDate()
 
             //return y +'-'+ m + '-' +d
@@ -97,7 +99,8 @@
             }
         })
 
-
+        //自定义全局按键修饰符修饰符
+        Vue.config.keyCodes.f2 =113
 
         // 创建Vue实例，得到ViewModel
         var vm = new Vue({
@@ -187,6 +190,8 @@
             methods:{},
 
                 //methods filters 都是对象，注意不要把s忘记写
+                //过滤器的调用采用的是就近原则，如果私有过滤和器和全局过滤器名称一致了，
+                //优先调用私有的过滤器
 
                 filters: { //定义私有过滤器  过滤器有两个条件{过滤器名称和处理函数}
                 
@@ -198,15 +203,15 @@
 
                         //时间的格式 yyyy-mm-dd
                         var y = dt.getFullYear()
-                        var m = dt.getMonth() + 1
-                        var d = dt.getDate()
+                        var m = (dt.getMonth() + 1).toString().padStart(2,'0')
+                        var d = dt.getDate().toString().padStart(2,'0')
 
                         if(pattern.toLowerCase() === 'yyyy-mm-dd') {
                             return `${y}-${m}-${d}`
                         } else {
-                            var hh = dt.getHours()
-                            var mm = dt.getMinutes()
-                            var ss = dt.getSeconds()
+                            var hh = dt.getHours().toString().padStart(2,'0')
+                            var mm = dt.getMinutes().toString().padStart(2,'0')
+                            var ss = dt.getSeconds().toString().padStart(2,'0')
 
                             return `${y}-${m}-${d} ${hh}:${mm}:${ss}` 
                 }
