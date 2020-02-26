@@ -24,16 +24,21 @@
                 <label>
                     Id:
                     <!-- 需要vue管理，所以需要做双向数据绑定 -->
-                    <input type="text" class="from-control" v-moudel="id">
+                    <input type="text" class="from-control" v-model="id">
                 </label>
 
                 <label>
                     Name:
-                    <input type="text" class="from-control" v-moudel="name">
+                    <input type="text" class="from-control" v-model="name">
                 </label>
                 <!-- 注意，其实这个方法也可以不带括号，但是但括号就可以传参，所以建议带上 -->
                 <input type="button" value="添加" class="btn btn-primary" @click = "add()">
-             </div>
+             
+                <label>
+                    搜索关键字:
+                    <input type="text" class="from-control" v-model="keyword">
+                </label>
+            </div>
         </div>
        
         <!-- 快捷键bs3-table画一个表，注意你快捷键的设置 -->
@@ -52,7 +57,7 @@
                 <td v-text="item.name"></td>
                 <td>{{item.ctime}}</td>
                 <td>
-                    <a href="@click.prevent=">删除</a>
+                    <a href="" @click.prevent=del(item.id)>删除</a>
                 </td>
             </tr>
          </tbody>
@@ -68,6 +73,7 @@
             data:{
                 id:'',
                 name:'',
+                keyword:'',
                 list: [
                     {id:1,name:'beijing', ctime: new Date()},
                     {id:2,name:'baoma', ctime: new Date()},
@@ -86,9 +92,31 @@
                     var car = {id : this.id, name: this.name, ctime: new Date()}
                     this.list.push(car)
                     this.id = this.name = ''
-                }
+                },
+                del(id) {   //根据id删除数据
+                    //分析：
+                    //1.如何让根据Id，找到要删除这一项的索引
+                    //2.如果找到索引，直接调用 数组的 splice方法
 
-            }  
+                    //方式1，借助于some
+                    // this.list.some((item,i)=>{
+                    //     if(item.id == id) {
+                    //         this.list.splice(i,1)
+                    //         //在数组的some方法中，如果return true，就会立即终止这个数组的后续循环
+                    //         return true;
+                    //     }
+                    // })
+
+                    //方式2
+                    var index = this.list.findIndex(item =>{
+                        if(item.id == id) {
+                            return true;
+                        }
+                    })
+                    this.list.splice(index,1)
+                    
+                }
+            }
         });
         </script>
     
