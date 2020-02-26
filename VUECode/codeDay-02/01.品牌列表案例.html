@@ -36,7 +36,8 @@
              
                 <label>
                     搜索关键字:
-                    <input type="text" class="from-control" v-model="keyword">
+                    <!-- 注意：Vue中素有的指令，在带哦用的时候都以 v- 开头 -->
+                    <input type="text" class="from-control" v-model="keywords">
                 </label>
             </div>
         </div>
@@ -52,7 +53,10 @@
                 </tr>
             </thead>
          <tbody>
-            <tr v-for ="item in list" :key="item.id">
+             <!-- 之前v-for中的数据直接是从data渲染过来的， -->
+             <!-- 现在自定义了一个search方法，同时，把所有的关键字，通过传参的方式传递给search方法 -->
+             <!-- 在search方法内部，通过执行for循环，把所有符合搜索关键字的数据，保存到一个新数组中，返回 -->
+            <tr v-for ="item in search(keywords)" :key="item.id">
                 <td>{{item.id}}</td>
                 <td v-text="item.name"></td>
                 <td>{{item.ctime}}</td>
@@ -73,7 +77,7 @@
             data:{
                 id:'',
                 name:'',
-                keyword:'',
+                keywords:'', //搜索的关键字
                 list: [
                     {id:1,name:'beijing', ctime: new Date()},
                     {id:2,name:'baoma', ctime: new Date()},
@@ -115,6 +119,16 @@
                     })
                     this.list.splice(index,1)
                     
+                },
+                //搜索
+                search(keywords) { //根据关键字，进行数据的搜索
+                    var newList =[]
+                    this.list.forEach(item => {
+                        if (item.name.indexOf(keywords) != -1) {
+                            newList.push(item)
+                        }
+                    })
+                    return newList
                 }
             }
         });
