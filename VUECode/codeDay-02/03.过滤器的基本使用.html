@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <!-- 方式1 -->
+        <!-- <p>{{ msg | msgFormat}}</p> -->
+
+        <!-- 方式2 -->
+        <!-- 过滤器可以多次的去调用 注意这个过滤器的命名不能含有数字 -->
+        <p>{{ msg | msgFormat('文天祥','时穷') | mf }}</p>
+    </div>
+
+    <script>
+        //定义一个Vue全局的过滤器，名字交做msgFormat,这个过滤器回调一个function方法， 可以传参
+        // 方式1  Vue.filter('msgFormat',function)
+       
+        Vue.filter('msgFormat',function(msg,arg,arg2){
+            
+            //字符串的replace方法，第一个参数出来可以写一个字符串之外，话可以定义正则，否则只能替换一个 
+            // 方式2 return msg.replace(/惶恐/g,'零丁')
+            
+            // 过滤器可以传递多个参数
+            return msg.replace(/惶恐/g,arg+arg2)
+        })
+
+        Vue.filter('mf',function(msg){
+            return msg + '南宋'
+        })
+
+
+        //创建Vue实例，得到ViewModel
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'惶恐滩头说惶恐'
+            },
+            methods:{}
+        });
+    </script>
+
+
+    
+</body>
+</html>
