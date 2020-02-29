@@ -1,2 +1,2 @@
 # mycode
-this is my practice code.
+Record my daily practice code and questions to reflect on.
