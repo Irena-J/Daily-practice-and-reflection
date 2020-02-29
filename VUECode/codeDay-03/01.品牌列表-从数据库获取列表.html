@@ -11,6 +11,7 @@
     <link rel ="stylesheet" href ="./lib/bootstrap-3.3.7.css">
 </head>
 
+
 <body>
     <div id="app">
 
@@ -34,7 +35,7 @@
         </div>
 
         
-        <!-- 表单 -->
+        <!-- 画表格 -->
         <table class = " table table-bordered table-hover table-striped">
             <thead>
                 <tr>
@@ -63,19 +64,20 @@
         // 如果我们通过全局配置了，请求的数据接口 根域名，则，在每次单独发起http请求时，
         //请求的 url路径 应该以相对路径开头，前面不能带 / ，否则不会启用根路径做拼接；
 
+        //关于这个跨域问题的解决方法
         Vue.http.options.root = 'http://vue.studyit.io/'
         
         //全局启用emulateJSON选项
         Vue.http.options.emulateJSON = true;
 
         //创建Vue实例，得到ViewMoodel
-        var vm = new Vuw({
+        var vm = new Vue({
             el:'#app',
             data:{
             name:'',
                 list:[//存放所有品牌列表的数组
-                //     {id:1, name:'特斯拉',ctime:new Date()},
-                //     {id:2, name:'五菱宏光',ctime:new Date()}
+                    //  { id : 1, name:'特斯拉',ctime:new Date()},
+                    //  { id : 2, name:'五菱宏光',ctime:new Date()}
                  
                  ]
             },
@@ -95,6 +97,7 @@
                     // 5.先判断 result.status 是否等于0，如果等于0就成功，可以把result.message复制给this.list
                     //   如果不等于0，可以弹框提醒，获取数据失败
                 
+                    // Uncaught (in promise)关于这个问题可以在then后加入异常捕获机制
                     this.$http.get('api/getprodlist').then(result =>{
                         //注意，通过$http获取到的数据，都在result.body中放着
                         var result = result.body
@@ -115,7 +118,7 @@
                     //      第二个参数，要提交给服务器的数据，要以对象形式提交给服务器{name:this.name}
                     //      第三个参数：是一个配置对象，要以哪种表单数据类习惯提交过去，{emulateJSON:true},
                     //      以普通表单格式，将数据提交给服务器 application/x-www-form-urlencoded
-                    // 3.在post方法中，使用.then 来设置陈工的回调函数，如果想要拿到成功的结果，需要result.body
+                    // 3.在post方法中，使用.then 来设置成功时的回调函数，如果想要拿到成功的结果，需要result.body
                    
                     /* this.$http.post('api/addproduct',{name:this.name},{
                         emulateJSON:true }).then(result =>{
@@ -133,7 +136,7 @@
 
                      this.$http.post('api/addproduct',{name:this.name},{
                      }).then(result =>{
-                            if(result.body.status == 0) {
+                            if(result.body.status === 0) {
                                 //成功了
                                 //添加完成后，只需要手动，再调用一下 getAllList就能刷新品牌列表
                                 this.getAllList()

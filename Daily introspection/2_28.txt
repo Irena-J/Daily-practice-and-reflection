@@ -1,0 +1,2 @@
+1、Uncaught (in promise) 需要在then后面加入catch()异常捕获
+2、跨域问题的解决方案

@@ -1,4 +1,4 @@
-//造一棵二叉树
+//孩子表示法造一棵二叉树
 class BTNode{
 	BTNode left; //左节点
 	BTNode right; //右节点
@@ -8,6 +8,8 @@ class BTNode{
 		this.val = val;
 	}
 }
+
+
 //二叉树的节点个数
 public int getNodeCount(BTNode root) {
 	//空树
@@ -16,3 +18,5 @@ public int getNodeCount(BTNode root) {
 	}
 	return 1 + getNodeCount(root.left) + getNodeCount(root.right);
 }
+
+//
