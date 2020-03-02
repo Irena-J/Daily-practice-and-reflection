@@ -62,9 +62,8 @@
 
 <script>
         // 如果我们通过全局配置了，请求的数据接口 根域名，则，在每次单独发起http请求时，
-        //请求的 url路径 应该以相对路径开头，前面不能带 / ，否则不会启用根路径做拼接；
+        //请求的 url路径 应该以相对路径开头，就是接口前面不能带 / ，否则不会启用根路径做拼接；
 
-        //关于这个跨域问题的解决方法
         Vue.http.options.root = 'http://vue.studyit.io/'
         
         //全局启用emulateJSON选项
@@ -150,6 +149,15 @@
                 },
                 
                 del(id) { //删除品牌
+                //emulateJSON = true then后面不必再写了，因为全局使用了
+                    this.$http.get('api/delproduct/' + id).then(result =>{
+                        if(result.body.status === 0) {
+                            //删除成功
+                            this.getAllList()
+                        } else {
+                            alert('删除失败！')
+                        }
+                    })
 
                 }
 
