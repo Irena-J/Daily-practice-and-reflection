@@ -11,7 +11,7 @@
         /* v-enter [这是一个时间点] 是进入之前，元素的起始状态，此时还没有开始进入 */
         /* v-leave-to [这是一个时间点] 是动画离开之后，离开的终止状态，此时，元素 动画已经结束了 */
     
-     .v-enter,   
+    .v-enter,   
     .v-leave-to{
         opacity: 0;
         transform:translateX(150px);
@@ -23,18 +23,39 @@
     .v-leave-active{
         transition:all 0.8s ease;
     }
+
+    .my-enter,   
+    .my-leave-to{
+        opacity: 0;
+        transform:translateY(150px);
+    }
+
+    /* v-enter-active [入场动画的时间段] */
+    /* v-leave-active [离场动画的时间段] */
+    .my-enter-active,
+    .my-leave-active{
+        transition:all 0.8s ease;
+    }
     </style>
 
 </head>
 <body>
     <div id ="app">
         <input type = "button" value = "toggle" @click="flag=!flag">
+
         <!-- 需求：点击按钮，让 h3 显示，再点击，让 h3 隐藏 -->
         <!-- 1.使用 transition 元素，把 需要被动画控制的元素，包果起来 -->
         <!-- transition 元素，是 Vue 官方提供的 -->
         <transition>
             <h3 v-if="flag">这是一个bug</h3>
         </transition>
+
+        <hr>
+        <input type = "button" value = "toggle2" @click="flag2=!flag2">
+        <transition name = "my">
+            <h3 v-if="flag2">这是一个2bug</h3>
+        </transition>
+    
     </div>
 
     <script>
@@ -42,6 +63,7 @@
             el:'#app',
             data:{
                 flag:false,
+                flag2:false,
             },
             methods:{
 
