@@ -1,0 +1,5 @@
+1、Uncaught (in promise) 需要在then后面加入catch()异常捕获
+2、跨域问题的解决方案
+3、针对 java 面经上的点 抽丝剥茧 录音回答
+
+3/4
