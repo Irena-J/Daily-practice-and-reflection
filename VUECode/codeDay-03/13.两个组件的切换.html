@@ -8,7 +8,8 @@
 </head>
 <body>
     <div id = "app">
-        <a href ="" @click.prevent="flag=true">登录</a>
+        <!-- 存在缺陷,就是只能切换两个 -->
+        <a href ="" @click.prevent="flag = true">登录</a>
         <a href =""@click.prevent="falg = false">注册</a>
 
         <login v-if = "flag"></login>
