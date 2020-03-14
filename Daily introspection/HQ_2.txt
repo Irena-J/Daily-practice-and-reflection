@@ -5,3 +5,10 @@
 5、token
 6、分支管理
 7、把你的博客搭起来
+8、Thread是java.lang包里的类，而java.lang这个包是自动引入的，所以可以直接Thread.静态方法
+9、线程创建的两种方式(blog)
+	分析源码
+	
+	一旦调用start()方法，则会通过JVM找到run()方法去执行，怎么执行自己的逻辑代码呢？
+	一种是继承Thread，然后重写run方法，jvm执行的就是自己的写的run方法了。一种是传入一个target，
+	然后在Thread的run方法中调用target的run方法。
