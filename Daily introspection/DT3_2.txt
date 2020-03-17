@@ -45,7 +45,8 @@ $Finished	String StringBuffer 和StringBuilder之间的关系理清楚 blog
 $Finished	匿名内部类(启动线程的时候用了的，回顾) blog
 
 3/18
-二叉树
+二叉树 
+提前预习
 
 	
 	
