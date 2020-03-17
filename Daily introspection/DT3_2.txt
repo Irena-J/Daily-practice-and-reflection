@@ -28,17 +28,24 @@ $Finished	案例由售票系统引起的线程安全问题 (blog)
 
 
 3/15
+
 数据库内联外联 blog
 $Finished	基础理解：线程、线程池、进程、//协程//、并发、并行、blog
 
 3/16
-匿名内部类 blog
-String StringBuffer 和StringBuilder之间的关系理清楚
+
 字符串缓冲区
 常量池
 线程池
-字符串拼接的几种方式(注意String做拼接操纵是append)
-匿名内部类(启动线程的时候用了的，回顾)
+
+3/17
+
+$Finished	字符串拼接的几种方式(注意String做拼接操纵底层是append) blog
+$Finished	String StringBuffer 和StringBuilder之间的关系理清楚 blog
+$Finished	匿名内部类(启动线程的时候用了的，回顾) blog
+
+3/18
+二叉树
 
 	
 	
