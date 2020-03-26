@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>用户注册</title>
+
+    <style type="text/css">
+        <!-- 定义一个类选择器-->
+        .registerStyle {      
+          <!--设置左内边距为60px，1px的圆角矩形，颜色如下，宽380px，高200px -->   
+            padding-left:60px;
+            border : 1px solid #aaaaaa;  
+            width:380px;
+            height:200px;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+  <!-- 设置左内边距为130px -->
+    <header style="padding-left:130px">
+      <!-- 标题如下，字号h2 -->
+        <h2>BookShop会员注册</h2>
+    </header>
+    <!-- form表单 -->
+    <!-- 读取参数到UserRegister.html -->
+    <form action="UserRegister.html" method="post">
+        <!-- 定义registerStyle类  -->
+      <div class="registerStyle">
+          <!-- 边框上边距 10px -->
+            <table style="padding-top:10px;">
+              <!-- 定义五个可输入文本单行框 -->
+                <tr><td>用户名：</td>
+                   <td><input name="username" type="text"/></td> </tr>
+                <tr> <td>密码：</td>
+                    <td><input name="password" type="password"/></td></tr>
+                <tr><td>确认密码：</td>
+                    <td><input name="passwordConfirm" type="password"/></td></tr>
+                <tr> <td>邮箱：</td>
+                    <td><input name="email" type="text"/>@
+                        <select>
+                          <!-- 创建带有三个选项的下拉框选择列表 -->
+                            <option value="gmail">gmail.com</option>
+                            <option value="qq">qq.com</option>
+                            <option value="163">163.com</option>
+                        </select>
+                    </td></tr>                
+                <tr><td>联系电话：</td>
+                   <td><input name="contact" type="number"/></td></tr>                
+<tr><td>性别：</td>
+                    <!-- 定义单选按钮，可触发，默认是男 -->
+                    <td><input type="radio" name="r1" checked />男
+                        <input type="radio" name="r1"/>女
+                    </td></tr>                
+                <tr> <td>兴趣爱好：</td>
+                  <!-- 定义三个复选框 -->
+                    <td> <input type="checkbox" name="history" />历史
+                        <input type="checkbox" name="computer"/>计算机
+                        <input type="checkbox" name="finance"/>金融
+                    </td></tr>               
+            </table>
+            <!-- 左边距100px,上边距15px -->
+            <div style="padding-left:100px;padding-top:15px;">
+               <!--添加了两个按钮注册和取消  -->
+              <input name="register" type="button" value="注册"/>
+              <input name="cancel" type="button" value="取消"/>
+            </div>
+       </div>
+    </form>
+</body>
+</html>
