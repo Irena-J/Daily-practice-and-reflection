@@ -26,3 +26,35 @@ public class Main {
 }
 ```
 
+```
+汽水瓶问题
+
+import java.util.*;
+public class Main{
+	public static int drink(int n) {
+		int total = 0; // 饮料总数
+		// 当大于两个空瓶的时候才可以换饮料
+		while (n > 2) {
+			// n/3表示能够换来的饮料
+			total = total + n/3;
+			// 新的空瓶个数 n
+			n = n/3 + n%3;
+		}
+		// 如果n==2，说明有两个空瓶可以同商家借一瓶
+		if (n == 2) {
+			total = total + 1;
+		}
+		return total;
+	}
+	public static void main(String[] args) {
+		// 创建键盘录入对象
+		Scanner sc = new Scanner(System.in);
+		int n;
+		while (sc.hasNext()) {
+			n = sc.nextInt();
+			System.out.println(drink(n));
+		}
+	}
+}
+```
+
