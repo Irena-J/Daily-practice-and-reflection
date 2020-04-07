@@ -129,3 +129,28 @@ public class AntiOrder {
     			
 ```
 
+
+
+```
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Collections;
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		LinkedList<Integer> li = new LinkedList<Integer>();
+		while (sc.hasNextInt()) {
+			li.add(sc.nextInt());
+		}
+
+		还得这样拿到并删除k，没见过这种测试用例，mark
+		int k = li.pollLast();
+		Collections.sort(li); // 按升序排列
+		for (int i = 0; i < k; i++) {
+			System.out.print(li.get(i));
+		}
+		System.out.print(" ");
+	}
+}
+```
+
