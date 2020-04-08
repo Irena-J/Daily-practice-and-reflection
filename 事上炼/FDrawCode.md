@@ -154,3 +154,35 @@ public class Main {
 }
 ```
 
+```
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in)
+		int n = sc.nextInt();
+		System.out.println(isFibnacci(n));
+	}
+	public static int isFibnacci(int n) {
+		if (n == 0 || n == 1) {
+			return 0;
+		}
+		int f1 = 0;
+		int f2 = 1;
+		int f3 = 1;
+		
+		while (f3 != n) {
+			f3 = f2 + f1;
+			f1 = f2;
+			f2 = f3;
+			if (f3 == n) {
+				return 0;
+			} 
+			if (f3 > n) {
+				int num1 = f3-n;
+				int num2 = n - f1;
+				return (f3-n) > (n-f2) ? n-f2 ：f3-n;
+			}
+		}
+	}
+}
+```
+
