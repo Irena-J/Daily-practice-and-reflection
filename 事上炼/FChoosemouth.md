@@ -27,6 +27,66 @@ A派生出子类B，B派生出子类C，并且在java源代码中有如下声明
 
 
 
+day 14
+
+
+
+```
+一、选择题
+2、内存回收程序负责释放无用内存
+3、流媒体技术是一种可以使用音频、视频和其他多媒体信息在Internet及Intranet上实时的，无需下载等待的方式进行播放的技术。
+5、形式参数可以被视为local variable
+6、下列哪种情况可以终止当前线程的运行？ 抛出一个异常时
+8、SimpleDateFormat对象是线程不安全的
+```
+
+```
+二、编程题
+1、组个最小数：给定数组0-9各若干个。可以任意顺序排序这些数字，但必须全部使用。目标 是使得最后得到的数尽可能小(注意0不能做首位)。例如：给定两个0、两个1，三个5，一个8，我们得到的最小的数就是10015558。
+eg:
+输入：(10个数字的总个数不超过50，并且至少有一个非0的数字)
+2 2 0 0 0 3 0 0 1 0
+输出：
+10015558
+// 这个题的关键在于把题目读清
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int[] arr = new int[10];
+		for (int i = 0; i < 10; ++i) {
+			// 存储0-9对应的出现次数
+			arr[i] = sc.nextInt();
+		}
+		// 先把第一位数输出,注意0号位一定是0
+		for (int i = 1; i < 10; ++i) {
+			// 如果从1号位置也就是数字0往后的第一个出现次数不为0的输出
+			if (arr[i] != 0) {
+				System.out.print(i);
+			}
+		}
+		// 输出 0 号位置的所有的0
+		for (int i = 1; i < 10; ++i) {
+			while (arr[0] != 0) {
+				System.out.print(0);
+				arr[0]--;
+			}
+		}
+		// 最后按照 1-9的顺序输出，因为可能1不止出现一次,所以从1开始
+		for (int i= 1; i < 10; i++) {
+			while (arr[i] != 0) {
+				System.out.println(i);
+				arr[i]--;
+			}
+		}
+	}
+}
+
+
+```
+
 day 15
 
 ```
