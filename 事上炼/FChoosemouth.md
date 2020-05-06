@@ -1,4 +1,8 @@
-day02 
+[TOC]
+
+## April
+
+### day 02
 
 ```
 A派生出子类B，B派生出子类C，并且在java源代码中有如下声明：
@@ -21,18 +25,93 @@ A派生出子类B，B派生出子类C，并且在java源代码中有如下声明
  表现形式：
  	方法重载
  	方法重写
- 	
+```
 
+### day 13 【跟奥巴马一起编程】【超长整数相加】
+
+```
+选择题
+1. 关于JVM内存，如下图
+```
+
+![img](https://uploadfiles.nowcoder.com/images/20180701/3807435_1530422766821_56E98F2DF01A734BD7F1AF7A95A7C2D7)
+
+![img](https://uploadfiles.nowcoder.com/images/20180701/3807435_1530422766821_56E98F2DF01A734BD7F1AF7A95A7C2D7)
+
+```
+5. java编译出来的目标文件，可以运行在任意jvm上，注意这句话成立要注意版本问题，就是高级的不能运行在低级的JVM上，jvm不能向上兼容哦；java运行时才进行指令翻译。
+```
+
+```
+【跟奥巴马一起编程】
+
+在屏幕上画一个正方形。
+
+输入在一行中给出正方形N和组成正方形边的某种字符C，间隔一个空格
+10 a
+
+输出由给定字符C画出的正方形。但是注意到行间距比利间距大，所以为了让结果看上去更像正方形，我们输出的行数实际上是列数的50%
+aaaaaaaaaa
+a		 a
+a		 a
+a		 a
+aaaaaaaaaa
+
+看成一部分处理，一个实心的正方形加中间的空格
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		char c = sc.next().charAt(0);
+		
+		for (int i = 0; i < (N>>1); i++) {
+			for (int j = 0; j < N; j++) {
+				if (i == 0 || j == 0 || i == (N>>1)-1 || j == N-1) {
+					System.out.print(c);
+				} else {
+					System.out.print("");
+				}
+			}
+			System.out.println("");
+		}
+	}
+}
+
+分三部分考虑，第一行、中间行和最后一行的处理
+import java.util.Scanner;
+public clss Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt(); //输出的列数
+		String c = sc.next(); //输出的字符
+		for (int i = 1; i <= N; i++) { //输出第一行
+			System.out.print(c);
+		}
+		System.out.print(c);
+	}
+	System.out.println(); // 第一行换行
+	for (int i = 1; i <= Mth.ceil((double)N/2)-2; ++i) { //输出中间行
+		System.out.print(c); // 中间行第一个字符
+		for (int j = 2; j <= N-1; j++) {
+			System.out.print(" "); //中间行其它字符为空字符
+		}
+		System.out.println(c); //中间行最后一个字符
+	}
+	for (int i = 1; i <= N; ++i) { //输出最后一行
+		System.out.print(c);
+	}
+}
 ```
 
 
 
-day 14
-
-
+### day 14 【尼克彻斯定理】【组个最小数】
 
 ```
-一、选择题
+选择题
 2、内存回收程序负责释放无用内存
 3、流媒体技术是一种可以使用音频、视频和其他多媒体信息在Internet及Intranet上实时的，无需下载等待的方式进行播放的技术。
 5、形式参数可以被视为local variable
@@ -41,7 +120,8 @@ day 14
 ```
 
 ```
-二、编程题
+【组个最小数】
+
 1、组个最小数：给定数组0-9各若干个。可以任意顺序排序这些数字，但必须全部使用。目标 是使得最后得到的数尽可能小(注意0不能做首位)。例如：给定两个0、两个1，三个5，一个8，我们得到的最小的数就是10015558。
 eg:
 输入：(10个数字的总个数不超过50，并且至少有一个非0的数字)
@@ -83,11 +163,78 @@ public class Main {
 		}
 	}
 }
-
-
 ```
 
-day 15
+```
+【尼克彻斯定理】
+
+验证尼科斯彻定理，即：任何一个整数m的立方都可以写成m歌连续奇数之和。eg：
+1^3 = 1
+2^3 = 3+5
+3^3 = 7+9+11
+4^3 = 13+15+17+19
+
+输入一个 int 整数
+6
+
+输出分解后的string
+31+33+35+37+39+41
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		while (sc.hasNextInt()) {
+			int n = sc.nextInt();
+			int a = m*(m-1)+1;
+			System.out.print(a)
+			for (int i = 1; i < n; ++i) {
+				System.out.print("+"+(a+=2));
+			}
+			// 注意OJ里面跑一定要加上这个换行
+			System。out.prinltn();
+		}
+	}
+}
+
+import java.util.Scanner;
+impirt java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		while (sc.hasNextInt()) {
+			int m = sc.nextInt();
+			System.out.println(GetSequeOddNum(m))
+		}
+	}
+	public static String GetSequeOddNum(int m) {
+		ArrayList<Integer> array = new ArrsyList<Integer>();
+		StringBuilder sb = new Stringbuilder();
+		int sum = 0;
+		for (int i = 0; i <= m; ++i) {
+			sum += i;
+		}
+		int num = 1;
+		array.add(num);
+		for (int j = 1; j < sum; ++j) {
+			num += 2;
+			array.add(num);
+		}
+		for (int i = array.size()-m; i < array.size()-1; ++i) {
+			sb.append(array.get(i));
+			sb.append("+");
+		}
+		sb.append(array.get(li.size()-1));
+		return sb.toString();
+	}
+}
+```
+
+
+
+### day 15
 
 ```
 编写一个函数，将两个数字相加。不得使用+或其他算术运算符，给定两个int A和B，请返回A+B的值
@@ -170,7 +317,7 @@ public class Main {
 
 ```
 
-day 16
+### day 16
 
 ```
 1.如果希望监听TCP端口9000，服务器端应该怎样创建socket？ new ServerSocket(9000)
