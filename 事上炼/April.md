@@ -27,14 +27,68 @@ A派生出子类B，B派生出子类C，并且在java源代码中有如下声明
  	方法重写
 ```
 
+编程题
+
+```
+1.汽水瓶问题
+这个题需要把前后关系理清楚
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int sum = 0;
+            while (n > 2) {
+                sum += n / 3;
+                n = n / 3 + n % 3;
+            }
+            if (n == 2) {
+                System.out.println(sum+1);
+            } else {
+                System.out.println(sum);
+            }
+        }
+    }
+}
+```
+
+```
+2.数组中的逆序对
+import java.util.*;
+
+public class AntiOrder {
+    public int count(int[] A, int n) {
+        // write code here
+        // 先暴力破解
+        int count = 0;
+        for (int i = 0; i < A.length; ++i) {
+            for (int j = i+1; j < A.length; ++j) {
+                if (A[i] > A[j]) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+方式一采用暴力破解的方式，遍历了两次数组，时间复杂度式O(n^2);可以优化
+优化：
+利用分治思想处理，先分治，把数组分隔成子数组，统计出子数组的逆序对数目，然后再统计相邻子数组之间逆序对的数目，在统计逆序对的过程中，还需要对数组进行排序，其实这是归并排序的思路。
+
+在理解了过程之后，如果迷糊究极注意多路递归的这个return，每一个跟着return不迷路。
+```
+
+
+
 ### day 13 【跟奥巴马一起编程】【超长整数相加】
 
 ```
 选择题
 1. 关于JVM内存，如下图
 ```
-
-![img](https://uploadfiles.nowcoder.com/images/20180701/3807435_1530422766821_56E98F2DF01A734BD7F1AF7A95A7C2D7)
 
 ![img](https://uploadfiles.nowcoder.com/images/20180701/3807435_1530422766821_56E98F2DF01A734BD7F1AF7A95A7C2D7)
 
