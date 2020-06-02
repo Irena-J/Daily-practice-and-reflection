@@ -72,7 +72,7 @@ HotSpot VM。。。各种虚拟机
 
 自己写JVM，需要注意一定有这两个：类加载器和执行引擎
 
-## 类加载的过程
+## 1.类加载的过程
 
 
 
@@ -114,9 +114,7 @@ HotSpot VM。。。各种虚拟机
 
 在singletion中，实现线程安全就有一个使用内部类的方式，因为类的static修饰的代码都是被clinit来执行的，但是虚拟机以及保证在多线程会对clinit的执行加锁，从而保证线程安全，也从而导致了静态内部类实现单例的线程安全。
 
-
-
-## 几种加载器的体会
+### 几种加载器的体会
 
 
 
@@ -150,7 +148,7 @@ Java虚拟机规范中将所有派生于抽象类 CLassLoader的类加载器都�
 
 
 
-## 其他知识点
+## 2.其他知识点
 
 
 
@@ -162,7 +160,7 @@ Java虚拟机规范中将所有派生于抽象类 CLassLoader的类加载器都�
 
 ![image-20200527144113671](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200527144113671.png)
 
-## 运行时数据区概述及线程
+## 3.运行时数据区概述及线程
 
 
 
@@ -684,11 +682,37 @@ JDK7 的内部空间
 
 ![image-20200529143812807](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200529143812807.png)
 
+StringTable 为什么要调整？
+
+![image-20200529182031732](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200529182031732.png)
+
+静态变量放在哪里？
+
+![image-20200529204018075](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200529204018075.png)
+
+![image-20200529215525205](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200529215525205.png)
+
+![image-20200530095436338](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530095436338.png)
+
+方法区的垃圾回收
+
+![image-20200530095823604](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530095823604.png)
+
+![image-20200530100028140](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530100028140.png)
+
+![image-20200530100338247](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530100338247.png)
+
+### 小结
+
+![image-20200530101116564](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530101116564.png)
+
+![image-20200530101321745](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530101321745.png)
+
+![image-20200530101402423](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530101402423.png)
 
 
 
-
-## 本地方法接口
+## 4.本地方法接口
 
 
 
@@ -711,6 +735,304 @@ JDK7 的内部空间
 现状
 
 ![image-20200528133524591](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200528133524591.png)
+
+
+
+## 5.对象的实例化与内存布局与访问定位
+
+![image-20200530104101993](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530104101993.png)
+
+### 对象的实例化
+
+![image-20200530104229211](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530104229211.png)
+
+![image-20200530112733920](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530112733920.png)
+
+对象的实例化过程：
+
+![image-20200530112907985](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530112907985.png)
+
+![image-20200530112929451](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530112929451.png)
+
+![image-20200530112947063](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530112947063.png)
+
+![image-20200530113001721](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530113001721.png)
+
+### 对象的内存布局
+
+
+
+
+
+![image-20200530113407445](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530113407445.png)
+
+![image-20200530141718051](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530141718051.png)
+
+![image-20200530142010707](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530142010707.png)
+
+![image-20200530142101595](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530142101595.png)
+
+### 对象的访问符
+
+
+
+![](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530142315118.png)
+
+![image-20200530142810057](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530142810057.png)
+
+
+
+直接指针图示：
+
+![image-20200530142836433](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530142836433.png)
+
+图示一：句柄访问
+
+![image-20200530142931322](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530142931322.png)
+
+## 6.直接内存概述
+
+![image-20200530145020006](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530145020006.png)
+
+![image-20200530145559809](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530145559809.png)
+
+![image-20200530145655553](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530145655553.png)
+
+![image-20200530150354083](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530150354083.png)
+
+![image-20200530151019740](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530151019740.png)
+
+## 7. 执行引擎
+
+
+
+### 执行引擎概述
+
+![image-20200530152019586](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530152019586.png)
+
+![image-20200530152624115](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530152624115.png)
+
+![image-20200530153020327](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530153020327.png)
+
+执行引擎的工作过程
+
+![image-20200530153541733](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530153541733.png)
+
+![image-20200530153833071](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530153833071.png)
+
+### Java代码编译和执行过程
+
+![image-20200530153946698](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530153946698.png)
+
+橙色以前就是前端编译器要做的，和虚拟机没关系。蓝色和绿色就是半编译半解释。
+
+![image-20200530154720923](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530154720923.png)
+
+![image-20200530154857401](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530154857401.png)
+
+![image-20200530154609662](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530154609662.png)
+
+### 机器码、指令、汇编语言
+
+![image-20200530155307312](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530155307312.png)
+
+机器码
+
+![image-20200530155452941](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530155452941.png)
+
+![image-20200530155554220](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530155554220.png)
+
+汇编语言
+
+![image-20200530155657444](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530155657444.png)
+
+高级语言
+
+![image-20200530155803312](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530155803312.png)
+
+![image-20200530155928167](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530155928167.png)
+
+![image-20200530160015702](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530160015702.png)
+
+![image-20200530160044365](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200530160044365.png)
+
+
+
+
+
+### 解释器
+
+![image-20200531104541662](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531104541662.png)
+
+![image-20200531105236854](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531105236854.png)
+
+解释器分类
+
+![image-20200531105423290](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531105423290.png)
+
+
+
+### JIT 编译器
+
+Java 代码的执行分类
+
+![image-20200531110809366](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531110809366.png)
+
+![image-20200531110823867](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531110823867.png)
+
+![image-20200531112342728](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531112342728.png)
+
+案例：
+
+![image-20200531112823615](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531112823615.png)
+
+
+
+编译器概念：
+
+![image-20200531113137395](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531113137395.png)
+
+热点代码及探测方式
+
+![image-20200531113750921](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531113750921.png)
+
+方法调用计数器
+
+![image-20200531113815203](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531113815203.png)
+
+
+
+![image-20200531114834745](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531114834745.png)
+
+![image-20200531114901011](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531114901011.png)
+
+回边计数器
+
+![image-20200531115257211](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531115257211.png)
+
+![image-20200531115343745](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531115343745.png)
+
+HotSpot VM 可以设置程序的执行方式
+
+![image-20200531115937379](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531115937379.png)
+
+可以在命令行改也可以通过在代码里改
+
+
+
+HotSpot VM中JIT分类
+
+![image-20200531120525911](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531120525911.png)
+
+注意 64 位操作系统支持server，没法切换
+
+![image-20200531120853049](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531120853049.png)
+
+![image-20200531120943104](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531120943104.png)
+
+## 8.String Table
+
+
+
+### String 的基本特性
+
+![image-20200531143753008](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531143753008.png)
+
+![image-20200531143659611](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531143659611.png)
+
+### String 的内存分配
+
+![image-20200531144233650](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531144233650.png)
+
+![image-20200531145046750](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531145046750.png)
+
+![image-20200531145408257](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531145408257.png)
+
+
+
+### String 的基本操作
+
+### 字符串拼接操作
+
+![image-20200531204714401](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531204714401.png)
+
+![image-20200531205846486](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531205846486.png)
+
+Jdk5.0之前是StringBuffer 之后是StringBuilder
+
+一定注意只是类似于，虽然你看现面方法好像确实是这么干的
+
+![image-20200531205931009](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531205931009.png)
+
+![image-20200531211704845](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531211704845.png)
+
+结果是：true
+
+![image-20200531211933928](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531211933928.png)
+
+![image-20200531212101552](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531212101552.png)
+
+### intern()
+
+![image-20200531213400214](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531213400214.png)
+
+JDK6 VS JDK7/8
+
+![image-20200531213512510](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531213512510.png)
+
+![image-20200531220125007](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531220125007.png)
+
+![image-20200531220018266](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531220018266.png)
+
+常量池空间记录了堆上拼接产生的 new String("11")，主要是因为 7 /8 将常量池放到堆里面了，所以就会在堆里面找。
+
+
+
+![image-20200531213544948](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531213544948.png)
+
+![image-20200531214616817](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531214616817.png)
+
+![image-20200531224717147](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200531224717147.png)
+
+
+
+### String Table 的垃圾回收
+
+
+
+### G1 中的String去重操作
+
+![image-20200601121000870](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200601121000870.png)
+
+![image-20200601121238780](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200601121238780.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
