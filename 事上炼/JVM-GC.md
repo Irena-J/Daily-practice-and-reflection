@@ -423,21 +423,287 @@ GC 的性能指标
 
 
 
+参数设置
+
+![image-20200604161451449](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604161451449.png)
+
+![image-20200604161556654](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604161556654.png)
+
+![image-20200604161717360](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604161717360.png)
+
+
+
+![image-20200604161821319](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604161821319.png)
+
 
 
 ### G1回收器：区域化分代式
+
+![image-20200604161907712](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604161907712.png)
+
+
+
+![image-20200604162117745](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162117745.png)
+
+
+
+![image-20200604162152049](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162152049.png)
+
+
+
+#### G1 回收器的特点(优点)
+
+![image-20200604162247665](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162247665.png)
+
+
+
+![image-20200604162335234](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162335234.png)
+
+
+
+![image-20200604162520872](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162520872.png)
+
+
+
+![image-20200604162548339](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162548339.png)
+
+#### 缺点
+
+![image-20200604162821677](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162821677.png)
+
+
+
+#### G1 回收器的参数设置
+
+![image-20200604162908173](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604162908173.png)
+
+
+
+![image-20200604163145183](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163145183.png)
+
+
+
+#### G1 回收器的适用场景
+
+![image-20200604163247366](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163247366.png)
+
+
+
+#### 分区Region：化整为零
+
+![image-20200604163536364](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163536364.png)
+
+
+
+![image-20200604163637087](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163637087.png)
+
+
+
+![image-20200604163701960](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163701960.png)
+
+
+
+![image-20200604163737797](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163737797.png)
+
+
+
+#### G1 回收器垃圾回收过程
+
+![image-20200604163835606](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163835606.png)
+
+
+
+![image-20200604163932300](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163932300.png)
+
+
+
+![image-20200604163953593](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604163953593.png)
+
+
+
+回收过程：Remembered Set
+
+![image-20200604164125287](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604164125287.png)
+
+![image-20200604170421741](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604170421741.png)
+
+
+
+##### 回收过程一：年轻代GC
+
+![image-20200604170617047](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200604170617047.png)
+
+值得注意的是因为除了堆外存在引用，堆内老年代也可能有引用指向年轻代，所以需要记忆集。
+
+![image-20200605105511355](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605105511355.png)
+
+
+
+![image-20200605105902271](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605105902271.png)
+
+
+
+##### 回收过程二：并发标记过程
+
+![image-20200605110447723](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605110447723.png)
+
+
+
+##### G1 回收过程三：混合回收
+
+![image-20200605110835256](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605110835256.png)
+
+
+
+##### G1 回收的可选过程：Full GC
+
+![image-20200605111350111](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605111350111.png)
+
+![image-20200605111622613](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605111622613.png)
+
+G1回收器优化建议
+
+![image-20200605111717025](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605111717025.png)
 
 
 
 ### 垃圾回收器总结
 
+![image-20200605112021416](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605112021416.png)
+
+![image-20200605112457440](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605112457440.png)
+
+![image-20200605113307187](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605113307187.png)
+
+
+
+垃圾回收器组合
+
+![image-20200605113803013](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605113803013.png)
+
+
+
+怎样选择垃圾回收器
+
+![image-20200605113831130](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605113831130.png)
+
+![image-20200605114335106](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605114335106.png)
+
+
+
+面试中要注意：
+
+![image-20200605114458677](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605114458677.png)
+
+
+
 
 
 ### GC日志分析
 
+![image-20200605114744164](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605114744164.png)
+
+
+
+![image-20200605114804286](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605114804286.png)
+
+
+
+![image-20200605114818409](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605114818409.png)
+
+
+
+![image-20200605115006462](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115006462.png)
+
+
+
+![image-20200605115054052](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115054052.png)
+
+
+
+![image-20200605115110420](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115110420.png)
+
+
+
+Minor GC 日志
+
+![image-20200605115148103](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115148103.png)
+
+
+
+Full GC 日志
+
+![image-20200605115218155](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115218155.png)
+
+
+
+
+
+
+
+![image-20200605115327877](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115327877.png)
+
+![image-20200605115433881](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115433881.png)
+
+![image-20200605115535028](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115535028.png)
+
 
 
 ### 垃圾回收器的新发展
+
+![image-20200605115701595](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115701595.png)
+
+
+
+JDK 11 新特性
+
+![image-20200605115734423](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115734423.png)
+
+![image-20200605115834974](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115834974.png)
+
+![image-20200605115918350](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115918350.png)
+
+
+
+![image-20200605115948554](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605115948554.png)
+
+
+
+![image-20200605120022522](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120022522.png)
+
+
+
+ZGC
+
+![image-20200605120059284](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120059284.png)
+
+
+
+![image-20200605120124622](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120124622.png)
+
+
+
+![image-20200605120155500](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120155500.png)
+
+
+
+![image-20200605120226696](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120226696.png)
+
+
+
+![image-20200605120249996](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120249996.png)
+
+
+
+JDK14 的新特性
+
+![image-20200605120307472](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120307472.png)
+
+
+
+![image-20200605120358495](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200605120358495.png)
+
+
 
 
 
