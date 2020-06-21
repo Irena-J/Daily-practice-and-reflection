@@ -2,6 +2,57 @@
 
 ## April
 
+### day 01 【统计回文】
+
+编程题
+
+```
+// 统计回文
+
+import java.util.Scanner;
+import java.lang.String;
+import java.lang.StringBuilder;
+
+// 先暴力
+// 把 b 放到 a 中的每一个位置，定义一个计数器，一旦判断是回文串就+1，最后输出结果
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String strA = sc.nextLine();
+            String strB = sc.nextLine();
+            int count = 0;
+            int len = strA.length();
+            for (int i = 0; i <= len;++i) {
+                StringBuilder sb = new StringBuilder(strA);
+                sb.insert(i,strB);
+                if (isPa(sb.toString())) {
+                    count++;
+                }
+            }
+            System.out.println(count);
+        }
+    }
+    // 判断回文串
+    public static boolean isPa(String str) {
+        int lan = str.length();
+        int tmp = lan-1;
+        for (int i = 0; i < lan; ++i) {
+            if (str.charAt(i) != str.charAt(tmp)) {
+                return false;
+            } 
+            if (tmp != i) {
+                tmp--;
+            }
+        }
+        return true;
+    }
+}
+```
+
+
+
 ### day 02
 
 ```
@@ -288,7 +339,7 @@ public class Main {
 
 
 
-### day 15
+### day 15 【两数相加】【 饥饿得小易】
 
 ```
 编写一个函数，将两个数字相加。不得使用+或其他算术运算符，给定两个int A和B，请返回A+B的值
@@ -371,7 +422,7 @@ public class Main {
 
 ```
 
-### day 16
+### day 16 【洗牌】 【统计同成绩人数】
 
 ```
 1.如果希望监听TCP端口9000，服务器端应该怎样创建socket？ new ServerSocket(9000)
