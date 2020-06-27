@@ -137,7 +137,7 @@ public class Finder {
 
 
 
-### day 02
+### day 02 【汽水瓶】【数组中的逆序对】
 
 ```
 A派生出子类B，B派生出子类C，并且在java源代码中有如下声明：
@@ -177,6 +177,7 @@ public class Main {
             int sum = 0;
             while (n > 2) {
                 sum += n / 3;
+                // 这里一定要注意，不要傻乎乎直接用sum，而是 n/3
                 n = n / 3 + n % 3;
             }
             if (n == 2) {
